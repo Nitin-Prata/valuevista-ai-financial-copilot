@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tx_001",
+    "date": "2026-03-01",
+    "merchant": "FreshMart",
+    "category": "food",
+    "amount": 1240.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Weekly groceries"
+  },
+  {
+    "id": "tx_002",
+    "date": "2026-03-02",
+    "merchant": "Metro Cab",
+    "category": "transport",
+    "amount": 320.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Airport commute"
+  },
+  {
+    "id": "tx_003",
+    "date": "2026-03-03",
+    "merchant": "City Rent",
+    "category": "rent",
+    "amount": 18500.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Monthly apartment rent"
+  },
+  {
+    "id": "tx_004",
+    "date": "2026-03-05",
+    "merchant": "Cafe Terra",
+    "category": "food",
+    "amount": 680.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Coffee and snacks"
+  },
+  {
+    "id": "tx_005",
+    "date": "2026-03-06",
+    "merchant": "CloudFlix",
+    "category": "entertainment",
+    "amount": 499.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Monthly subscription"
+  },
+  {
+    "id": "tx_006",
+    "date": "2026-03-08",
+    "merchant": "HealthPlus Pharmacy",
+    "category": "health",
+    "amount": 910.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Medicines"
+  },
+  {
+    "id": "tx_007",
+    "date": "2026-03-10",
+    "merchant": "FreshMart",
+    "category": "food",
+    "amount": 1380.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Groceries and produce"
+  },
+  {
+    "id": "tx_008",
+    "date": "2026-03-12",
+    "merchant": "RideNow",
+    "category": "transport",
+    "amount": 540.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Office commute"
+  },
+  {
+    "id": "tx_009",
+    "date": "2026-03-14",
+    "merchant": "StyleHub",
+    "category": "shopping",
+    "amount": 2750.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Clothing"
+  },
+  {
+    "id": "tx_010",
+    "date": "2026-03-18",
+    "merchant": "Cafe Terra",
+    "category": "food",
+    "amount": 720.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Dinner with friends"
+  },
+  {
+    "id": "tx_011",
+    "date": "2026-03-20",
+    "merchant": "City Power",
+    "category": "utilities",
+    "amount": 1850.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Electricity bill"
+  },
+  {
+    "id": "tx_012",
+    "date": "2026-03-21",
+    "merchant": "TravelNest",
+    "category": "travel",
+    "amount": 6200.0,
+    "currency": "INR",
+    "country": "India",
+    "note": "Weekend trip booking"
+  }
+]

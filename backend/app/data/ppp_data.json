@@ -1,0 +1,54 @@
+{
+  "countries": {
+    "India": {
+      "currency": "INR",
+      "usd_per_unit": 0.012,
+      "cost_index": {
+        "food": 35,
+        "rent": 28,
+        "transport": 30,
+        "general": 31
+      }
+    },
+    "USA": {
+      "currency": "USD",
+      "usd_per_unit": 1.0,
+      "cost_index": {
+        "food": 100,
+        "rent": 100,
+        "transport": 100,
+        "general": 100
+      }
+    },
+    "Germany": {
+      "currency": "EUR",
+      "usd_per_unit": 1.09,
+      "cost_index": {
+        "food": 82,
+        "rent": 74,
+        "transport": 79,
+        "general": 78
+      }
+    },
+    "UAE": {
+      "currency": "AED",
+      "usd_per_unit": 0.272,
+      "cost_index": {
+        "food": 71,
+        "rent": 84,
+        "transport": 58,
+        "general": 70
+      }
+    },
+    "Japan": {
+      "currency": "JPY",
+      "usd_per_unit": 0.0067,
+      "cost_index": {
+        "food": 76,
+        "rent": 66,
+        "transport": 89,
+        "general": 77
+      }
+    }
+  }
+}
