@@ -5,9 +5,7 @@ from pydantic import BaseModel, Field
 
 from app.services.ppp_engine import analyze_price
 
-
 router = APIRouter(tags=["analyze"])
-
 
 class AnalyzeRequest(BaseModel):
     price: float = Field(..., gt=0, description="Price in local country currency")
