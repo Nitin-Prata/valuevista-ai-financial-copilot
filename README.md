@@ -47,21 +47,21 @@ Apps tell you the *converted* number. Nobody tells you if it's **cheap, fair, or
 ### 1 · Main Dashboard
 > Balance, daily average, Banana Index, and the 2025 Wrapped banner — all above the fold.
 
-![Dashboard](screenshots\image.png)
+![Dashboard](./screenshots/image.png)
 
 ---
 
 ### 2 · Transaction Calendar
 > Click any date → AI-powered breakdown of exactly what you spent and why it matters.
 
-![Calendar](./screenshots/calendar.png)
+![Calendar](./screenshots/image%20copy.png)
 
 ---
 
 ### 3 · Money Wrapped — AI Slide Deck
 > 13 Gemini-generated slides. Top categories, weekend patterns, daily rhythm — your year as a story.
 
-![Wrapped](./screenshots/wrapped.png)
+![Wrapped](./screenshots/image%20copy%202.png)
 
 ---
 
