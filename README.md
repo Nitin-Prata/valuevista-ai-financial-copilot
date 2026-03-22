@@ -47,7 +47,7 @@ Apps tell you the *converted* number. Nobody tells you if it's **cheap, fair, or
 ### 1 · Main Dashboard
 > Balance, daily average, Banana Index, and the 2025 Wrapped banner — all above the fold.
 
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](screenshots\image.png)
 
 ---
 
