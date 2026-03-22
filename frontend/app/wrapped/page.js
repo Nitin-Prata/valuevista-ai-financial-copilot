@@ -15,7 +15,7 @@ function WrappedContent() {
   const [autoPlay, setAutoPlay] = useState(false);
 
   useEffect(() => {
-    fetchWrappedSlides(new Date().getFullYear(), 13).then((payload) => {
+    fetchWrappedSlides(new Date().getFullYear(), 5).then((payload) => {
       setSlides(payload.slides || []);
     });
   }, []);
@@ -64,7 +64,7 @@ function WrappedContent() {
               Prev
             </button>
             <span className="pill">
-              {active + 1} of {slides.length || 13}
+              {active + 1} of {slides.length || 5}
             </span>
             <button className="pill" onClick={() => setActive((v) => Math.min(slides.length - 1, v + 1))}>
               Next
@@ -81,7 +81,7 @@ function WrappedContent() {
         <h3>Your Spending Wrapped</h3>
         <p className="muted">Your 2025 Money Wrapped</p>
         <div className="topbar">
-          <span className="pill">{slides.length || 13} Slides</span>
+          <span className="pill">{slides.length || 5} Slides</span>
         </div>
         <Link href="/wrapped?view=1" className="vv-watch" style={{ width: "fit-content" }}>
           View

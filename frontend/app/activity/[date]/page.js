@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { askCopilot, fetchDateAnalysis, fetchMonthlySummary } from "../../../lib/api";
+import { useFxRate } from "../../../lib/useFxRate";
 import { categoryIcon, formatCurrency } from "../../../lib/utils";
 
 export default function ActivityDetailPage({ params }) {
+  const { rate, ready, inrToUsd } = useFxRate();
   const [detail, setDetail] = useState(null);
   const [monthly, setMonthly] = useState(null);
   const [tip, setTip] = useState("");
@@ -18,36 +20,40 @@ export default function ActivityDetailPage({ params }) {
   }, [params.date]);
 
   const firstTx = detail?.transactions?.[0];
+  const totalInr = detail?.total || 0;
+  const totalUsd = ready ? inrToUsd(totalInr) : totalInr / 83.5;
 
   return (
-    <main className="container vv-layout">
+    <main className="vv-dashboard-shell vv-layout">
       <section className="vv-detail-head">
-        <p className="muted">ForexFriend Copilot</p>
+        <p className="muted">ValueVista Copilot</p>
         <h2>
-          Analyze my financial activity on {params.date}. I had {detail?.count || 0} transaction(s).
+          Nitin — financial activity on {params.date}. {detail?.count || 0} transaction(s).
         </h2>
-        <p className="muted">Financial Activity - {params.date}</p>
+        <p className="muted">Financial Activity · {params.date}</p>
       </section>
 
       <section className="vv-alert">
-        <strong>Major Rent Payment Alert</strong>
-        <p>{detail?.analysis || "Loading analysis..."}</p>
+        <strong>Spending alert</strong>
+        <p>{detail?.analysis || "Loading analysis…"}</p>
       </section>
 
-      <section className="vv-kpi-grid">
-        <div className="vv-kpi-card">
-          <p className="muted">Amount</p>
-          <h3>{formatCurrency(detail?.total || 0, "USD")}</h3>
-          <p className="muted">{firstTx?.category || "No category"}</p>
+      <section className="vv-kpi-grid vv-kpi-colorful">
+        <div className="vv-kpi-card vv-kpi-accent-blue">
+          <p className="muted">Amount (INR)</p>
+          <h3>{formatCurrency(totalInr, "INR")}</h3>
+          <p className="muted">{firstTx?.category || "—"}</p>
         </div>
-        <div className="vv-kpi-card">
-          <p className="muted">Equivalent in INR</p>
-          <h3>{formatCurrency((detail?.total || 0) * 91.57, "INR")}</h3>
-          <p className="muted">PPP-aligned rough equivalent</p>
+        <div className="vv-kpi-card vv-kpi-accent-violet">
+          <p className="muted">Equivalent in USD</p>
+          <h3>${totalUsd.toFixed(2)}</h3>
+          <p className="muted">
+            Live rate {ready ? `₹${rate.toFixed(2)} / $1` : "loading…"}
+          </p>
         </div>
       </section>
 
-      <section className="vv-calendar-wrap">
+      <section className="vv-calendar-wrap vv-calendar-rich">
         <h3>Transaction Details</h3>
         <div className="vv-table">
           <div>Date</div>
@@ -68,18 +74,19 @@ export default function ActivityDetailPage({ params }) {
         <p>
           <strong>Analysis:</strong> {detail?.analysis}
         </p>
-        <div className="vv-note">
+        <div className="vv-note vv-note-gradient">
           <strong>Money Context</strong>
-          <p>{monthly?.summary || "Loading monthly context..."}</p>
+          <p>{monthly?.summary || "Loading monthly context…"}</p>
         </div>
         <div className="topbar">
           <Link className="pill pill-active" href="/monthly">
             View Monthly Spending
           </Link>
           <button
+            type="button"
             className="pill"
             onClick={async () => {
-              setTip("Loading housing guidance...");
+              setTip("Loading housing guidance…");
               const res = await askCopilot("Give me housing budget tips for this situation.", {
                 page: "activity_detail",
                 selected_date: params.date,
@@ -90,9 +97,10 @@ export default function ActivityDetailPage({ params }) {
             Housing Budget Tips
           </button>
           <button
+            type="button"
             className="pill"
             onClick={async () => {
-              setTip("Loading comparison guidance...");
+              setTip("Loading comparison guidance…");
               const res = await askCopilot("Compare this spending with previous months and tell me one action.", {
                 page: "activity_detail",
                 selected_date: params.date,
@@ -103,6 +111,7 @@ export default function ActivityDetailPage({ params }) {
             Compare Previous Months
           </button>
           <button
+            type="button"
             className="pill"
             onClick={async () => {
               const res = await askCopilot("Summarize this date in one quick line.", {

@@ -26,6 +26,13 @@ a {
   padding: 24px;
 }
 
+/* Wide dashboard / analytics shell — less side gutter, more content */
+.vv-dashboard-shell {
+  max-width: min(1600px, 100%);
+  margin: 0 auto;
+  padding: 20px clamp(16px, 3vw, 40px) 48px;
+}
+
 .topbar {
   display: flex;
   gap: 10px;
@@ -191,6 +198,13 @@ a {
   font-weight: 800;
 }
 
+.vv-name-gradient {
+  background: linear-gradient(135deg, #f8fafc 0%, #c7d2fe 45%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .vv-date {
   text-align: right;
 }
@@ -216,6 +230,17 @@ a {
   margin-bottom: 18px;
 }
 
+.vv-banner-rich {
+  background: linear-gradient(115deg, #7c3aed 0%, #db2777 38%, #2563eb 100%);
+  box-shadow: 0 20px 50px rgba(124, 58, 237, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.vv-sparkle {
+  opacity: 0.95;
+  letter-spacing: 0.06em;
+}
+
 .vv-banner h3,
 .vv-banner p {
   margin: 0;
@@ -238,6 +263,145 @@ a {
   border-radius: 999px;
   padding: 11px 18px;
   font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  white-space: nowrap;
+}
+
+.vv-watch:disabled {
+  opacity: 0.85;
+  cursor: wait;
+}
+
+/* Inline wrapped panel (opens under banner on dashboard) */
+.vv-wrapped-inline {
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background: linear-gradient(165deg, #1a1530 0%, #121826 55%, #0f172a 100%);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.card-animate {
+  animation: vv-pop 0.45s ease;
+}
+
+@keyframes vv-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vv-wrapped-inline-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.vv-wrapped-inline-title {
+  margin: 0 0 4px;
+  font-size: 1.35rem;
+}
+
+.vv-wrapped-inline-body {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: 16px;
+  min-height: 360px;
+  max-height: min(520px, 70vh);
+}
+
+.vv-slide-rail-inline {
+  overflow-y: auto;
+  padding-right: 6px;
+  border-right: 1px solid #2a3148;
+  max-height: 100%;
+}
+
+.vv-slide-main-inline {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.vv-slide-article-inline {
+  flex: 1;
+  min-height: 260px;
+  max-height: 420px;
+  overflow: auto;
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.vv-slide-article-inline h2 {
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  margin: 0 0 12px;
+}
+
+.vv-slide-article-inline p {
+  font-size: clamp(0.95rem, 1.35vw, 1.15rem);
+  line-height: 1.45;
+  margin: 0;
+  color: #dbeafe;
+}
+
+.vv-slide-footer-inline {
+  margin-top: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.vv-thumb-title {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #cbd5f5;
+  line-height: 1.25;
+}
+
+.pill-accent {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-color: rgba(167, 139, 250, 0.6);
+  color: #f5f3ff;
+}
+
+.pill-close {
+  border-color: #475569;
+  background: #1e293b;
+}
+
+@media (max-width: 900px) {
+  .vv-wrapped-inline-body {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+
+  .vv-slide-rail-inline {
+    border-right: none;
+    border-bottom: 1px solid #2a3148;
+    padding-bottom: 12px;
+    max-height: 200px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .vv-slide-rail-inline .vv-thumb {
+    min-width: 140px;
+  }
 }
 
 .vv-kpi-grid {
@@ -258,11 +422,71 @@ a {
   margin: 4px 0;
 }
 
+.vv-kpi-colorful .vv-kpi-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.vv-kpi-colorful .vv-kpi-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.vv-kpi-accent-blue {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+}
+
+.vv-kpi-accent-blue::before {
+  background: radial-gradient(circle at 80% 20%, #3b82f6, transparent 55%);
+}
+
+.vv-kpi-accent-rose {
+  border-color: rgba(244, 63, 94, 0.4);
+  box-shadow: 0 12px 30px rgba(244, 63, 94, 0.12);
+}
+
+.vv-kpi-accent-rose::before {
+  background: radial-gradient(circle at 20% 80%, #f43f5e, transparent 50%);
+}
+
+.vv-kpi-accent-violet {
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.15);
+}
+
+.vv-kpi-accent-violet::before {
+  background: radial-gradient(circle at 70% 30%, #8b5cf6, transparent 55%);
+}
+
+.vv-kpi-accent-amber {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.12);
+}
+
+.vv-kpi-accent-amber::before {
+  background: radial-gradient(circle at 50% 100%, #f59e0b, transparent 50%);
+}
+
+.vv-fx-hint {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
 .vv-calendar-wrap {
   border: 1px solid #24365f;
   background: linear-gradient(180deg, #172740 0%, #142238 100%);
   border-radius: 18px;
   padding: 16px;
+}
+
+.vv-calendar-rich {
+  border-color: rgba(99, 102, 241, 0.25);
+  background: linear-gradient(180deg, #162038 0%, #101827 100%);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.55);
 }
 
 .vv-calendar-head {
@@ -296,14 +520,19 @@ a {
   gap: 8px;
 }
 
+.vv-calendar-grid-large {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .vv-day {
-  min-height: 96px;
-  border-radius: 12px;
+  min-height: 112px;
+  border-radius: 14px;
   border: 1px solid #22375f;
-  background: #1a2a43;
+  background: linear-gradient(180deg, #1e2f4d 0%, #17243d 100%);
   color: #e6edff;
   text-align: left;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
 }
 
@@ -321,8 +550,96 @@ a {
 }
 
 .vv-day-amt {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
+  word-break: break-word;
+}
+
+.vv-month-total {
+  margin-top: 14px;
+}
+
+/* Copilot bar — reference style */
+.vv-copilot-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(129, 140, 248, 0.45);
+  background: rgba(15, 23, 42, 0.85);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.65);
+}
+
+.vv-copilot-bar .vv-copilot-input {
+  flex: 1 1 220px;
+  min-width: 180px;
+}
+
+.vv-copilot-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.45);
+  flex-shrink: 0;
+}
+
+.vv-copilot-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vv-copilot-text strong {
+  font-size: 15px;
+}
+
+.vv-copilot-text span {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.vv-copilot-input {
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 12px 14px;
+  font: inherit;
+  min-width: 0;
+}
+
+.vv-copilot-send {
+  padding-inline: 18px;
+}
+
+.vv-copilot-reply {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+.vv-suggestion-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pill-suggestion {
+  font-size: 12px;
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(129, 140, 248, 0.45);
 }
 
 .vv-splash {
@@ -415,6 +732,11 @@ a {
   background: #233f68;
   border-radius: 10px;
   padding: 10px;
+}
+
+.vv-note-gradient {
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.35), rgba(88, 28, 135, 0.3));
+  border: 1px solid rgba(129, 140, 248, 0.35);
 }
 
 .vv-wrapped-view {

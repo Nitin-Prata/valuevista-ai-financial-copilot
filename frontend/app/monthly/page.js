@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { fetchMonthlyOverview } from "../../lib/api";
+import { useFxRate } from "../../lib/useFxRate";
 import { formatCurrency } from "../../lib/utils";
 
 export default function MonthlyPage() {
+  const { rate, ready, inrToUsd } = useFxRate();
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -24,57 +26,63 @@ export default function MonthlyPage() {
     return total / data.series.length;
   }, [data]);
 
+  const averageUsd = ready ? inrToUsd(average) : average / 83.5;
+
   return (
-    <main className="container vv-layout">
+    <main className="vv-dashboard-shell vv-layout">
       <section className="vv-detail-head">
-        <p className="muted">ForexFriend Copilot</p>
+        <p className="muted">ValueVista Copilot</p>
         <h2>View Monthly Spending</h2>
         <p className="muted">Your financial journey from August 2025 to January 2026</p>
       </section>
 
       <section className="vv-alert">
         <strong>Spending Alert</strong>
-        <p>{data?.alert || "Loading alert..."}</p>
+        <p>{data?.alert || "Loading alert…"}</p>
       </section>
 
-      <section className="vv-calendar-wrap">
-        <ResponsiveContainer width="100%" height={260}>
+      <section className="vv-calendar-wrap vv-calendar-rich">
+        <ResponsiveContainer width="100%" height={280}>
           <AreaChart data={chartData}>
             <defs>
-              <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8c6cff" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#8c6cff" stopOpacity={0} />
+              <linearGradient id="fillMonthly" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#a855f7" stopOpacity={0.85} />
+                <stop offset="95%" stopColor="#6366f1" stopOpacity={0.05} />
               </linearGradient>
             </defs>
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Area type="monotone" dataKey="spent" stroke="#8c6cff" fill="url(#fill)" />
+            <XAxis dataKey="month" stroke="#94a3b8" />
+            <YAxis stroke="#94a3b8" />
+            <Tooltip
+              contentStyle={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 12 }}
+              labelStyle={{ color: "#e2e8f0" }}
+            />
+            <Area type="monotone" dataKey="spent" stroke="#c084fc" strokeWidth={2} fill="url(#fillMonthly)" />
           </AreaChart>
         </ResponsiveContainer>
       </section>
 
-      <section className="vv-calendar-wrap" style={{ marginTop: 12 }}>
+      <section className="vv-calendar-wrap vv-calendar-rich" style={{ marginTop: 12 }}>
         <h3>Monthly Breakdown Details</h3>
         <div className="vv-table">
           <div>Month</div>
-          <div>Total Spent</div>
+          <div>Total Spent (INR)</div>
           <div>Major Categories</div>
-          <div>Balance End</div>
+          <div>Balance End (INR)</div>
           {(data?.series || []).map((row) => (
             <div className="vv-table-row" key={row.month}>
               <span>{row.label}</span>
-              <span>{formatCurrency(row.total_spent, "USD")}</span>
+              <span>{formatCurrency(row.total_spent, "INR")}</span>
               <span>{row.major_categories}</span>
-              <span>{formatCurrency(row.balance_end, "USD")}</span>
+              <span>{formatCurrency(row.balance_end, "INR")}</span>
             </div>
           ))}
         </div>
-        <div className="vv-note">
+        <div className="vv-note vv-note-gradient">
           <strong>Banana Index Reality Check</strong>
           <p>
-            Your {formatCurrency(average, "USD")} average monthly spending equals about{" "}
-            {Math.round((average * 82) / 7)} bananas in India - that is serious money back home.
+            Your {formatCurrency(average, "INR")} average monthly spend (≈ ${averageUsd.toFixed(2)} USD
+            {ready ? ` @ ₹${rate.toFixed(2)}/$` : ""}) — compare to everyday costs back home to feel the real
+            weight.
           </p>
         </div>
       </section>
